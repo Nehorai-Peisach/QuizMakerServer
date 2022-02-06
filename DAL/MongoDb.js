@@ -1,41 +1,20 @@
-const { MongoClient } = require('mongodb')
+const config = require('config')
+const mongoose = require('mongoose')
 
 module.exports = class MongoDb {
-  constructor(dbConfig) {
-    this.db = dbConfig
-    this.init()
+  constructor() {
+    this.uri = config.get('database.uri')
   }
 
-  init() {
-    const uri =
-      'mongodb+srv://admin:admin123@quizmakerdb.fepwp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-
-    this.client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+  connect() {
+    return new Promise((resolve, reject) => {
+      mongoose
+        .connect(this.uri, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then((result) => {
+          console.log('connected')
+          resolve(result)
+        })
+        .catch((error) => reject(error))
     })
-  }
-
-  connect(collection) {
-    this.client.connect()
-
-    this.client.connection.on('connected', () => {
-      console.log('connected to db!!!')
-    })
-  }
-
-  disconnect() {
-    this.client.close()
-    this.client.connection.on('disconnected', () => {
-      console.log('disconnected to db!!!')
-    })
-  }
-
-  add(input, collection) {
-    if (this.client.state !== 'connected') return
-
-    const tmpCollection = client.db('QuizMakerDB').collection(collection)
-
-    tmpCollection.insertOne(input)
   }
 }

@@ -1,16 +1,16 @@
-const db = require("../DAL/db.questionsRepository.js");
+const container = require('../settings/containerConfig')
+const repo = container.resolve('questionsRepo')
 
 class QuestionsController {
   // Get Questions
-  getAllQuestions() {
-    return db.getAllQuestions();
+  async getAllQuestions() {
+    return await repo.getAllQuestions()
   }
 
   // Add question to the list
-  addQuestion(question) {
-    if (!question.Title) throw "question has no title";
-    return db.addQuestion(question);
+  async addQuestion(question) {
+    return await repo.addQuestion(question)
   }
 }
 
-module.exports = new QuestionsController();
+module.exports = new QuestionsController()

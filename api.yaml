@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: QuizMaker Tests
+  description: Handle requests
+  version: 1.0
+
+servers:
+  - url: http://localhost:4000/
+    description: server
+  - url: http://localhost:3000/
+    description: client
+
+paths:
+  /api/Questions/addQuestion:
+    post:
+      summary: summary...
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/questionParams'
+      responses:
+        200:
+          description: Successful Response
+        400:
+          description: User Error
+        500:
+          description: Internal Server Error
+
+components:
+  schemas:
+    questionParams:
+      type: object
+      required:
+        - Id
+        - Type
+        - TopicId
+        - Text
+        - LowerText
+        - Layout
+        - Tags
+      properties:
+        Id:
+          type: string
+        Type:
+          type: string
+        TopicId:
+          type: array
+          items:
+            type: string
+        Text:
+          type: string
+        LowerText:
+          type: string
+        Layout:
+          type: string
+        Tags:
+          type: array
+          items:
+            type: string
