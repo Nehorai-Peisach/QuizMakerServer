@@ -1,0 +1,15 @@
+export const Question = {
+  ID: String,
+  CompanyId: String,
+  Language: String,
+  ShowAnswersAfter: Boolean,
+  Introduction: paragraph,
+  TopicId: String,
+  Name: String,
+  PassingGrade: Number,
+  QuestionsId: [String],
+  MsgOnSuccess: paragraph,
+  MsgOnFailure: paragraph,
+  Delivery: emailDelivery,
+  ChangedDate: Date,
+}

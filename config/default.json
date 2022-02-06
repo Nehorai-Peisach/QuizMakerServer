@@ -1,0 +1,10 @@
+{
+  "server": {
+    "host": "http://localhost",
+    "port": 4000
+  },
+  "status": {
+    "error": 404,
+    "success": 200
+  }
+}
