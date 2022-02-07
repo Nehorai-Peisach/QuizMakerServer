@@ -1,4 +1,3 @@
-const config = require('config')
 const express = require('express')
 const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
@@ -6,8 +5,9 @@ const swaggerJsDocs = YAML.load('./api.yaml')
 const app = express()
 const questionRouter = require('./routes/questionRoutes')
 const cors = require('cors')
-const container = require('./settings/containerConfig')
+const container = require('./helpers/containerConfig')
 const db = container.resolve('db')
+const config = container.resolve('config')
 
 app.use(cors())
 

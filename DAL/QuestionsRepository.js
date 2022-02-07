@@ -1,28 +1,42 @@
-const config = require('config')
+const log = require('../helpers/logger')
 const Question = require('../models/Question')
 
 module.exports = class QuestionsRepository {
-  constructor() {
-    this.table = config.get('table.questions')
+  constructor(config) {
+    this.table = config.get('db.table.questions')
   }
 
   async addQuestion(input) {
-    const question = new Question({
-      Id: input.Id,
-      Type: input.Type,
-      TopicId: input.TopicId,
-      Text: input.Text,
-      LowerText: input.LowerText,
-      Layout: input.Layout,
-      Tags: input.Tags,
-    })
-    await question
-      .save()
+    await Question.Model.create(input)
       .then((result) => {
         return result
       })
-      .catch((err) => {
-        console.log(err)
+      .catch((err) => log(err))
+  }
+
+  async deleteQuestion(input) {
+    await Question.Model.deleteOne(input)
+      .then((result) => {
+        return result
       })
+      .catch((err) => log(err))
+  }
+
+  async getQuestion(input) {
+    await Question.Model.find(Question.Schema)
+      .where(input)
+      .then((result) => {
+        return result
+      })
+      .catch((err) => log(err))
+  }
+
+  async updateQuestion(oldQuestion, newQuestion) {
+    await Question.Model.updateOne(oldQuestion, newQuestion)
+      .where(input)
+      .then((result) => {
+        return result
+      })
+      .catch((err) => log(err))
   }
 }

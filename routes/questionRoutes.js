@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
-const controller = require('../controller/questions')
+const container = require('../helpers/containerConfig')
+const controller = container.resolve('questionsController')
 const asyncHandler = require('../helpers/asyncHandler')
 
 router.use(express.json())
@@ -23,6 +23,7 @@ router.post(
       const data = await controller.addQuestion(req.body)
       res.status(200).send(data)
     } catch (err) {
+      console.log(err)
       res.status(400).send(err)
     }
   })

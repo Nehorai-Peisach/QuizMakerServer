@@ -1,9 +1,8 @@
-const config = require('config')
 const mongoose = require('mongoose')
 
 module.exports = class MongoDb {
-  constructor() {
-    this.uri = config.get('database.uri')
+  constructor(config) {
+    this.uri = config.get('db.uri')
   }
 
   connect() {

@@ -11,11 +11,11 @@
     "error": 404,
     "success": 200
   },
-  "database": {
+  "db": {
     "name": "MainCluster",
-    "uri": "mongodb+srv://admin:admin123@maincluster.rebcv.mongodb.net/QuizMakerDb?retryWrites=true&w=majority"
-  },
-  "table": {
-    "questions": "Questions"
+    "uri": "mongodb+srv://admin:admin123@maincluster.rebcv.mongodb.net/QuizMakerDb?retryWrites=true&w=majority",
+    "table": {
+      "questions": "Questions"
+    }
   }
 }

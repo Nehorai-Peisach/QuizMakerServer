@@ -1,16 +1,14 @@
-const container = require('../settings/containerConfig')
-const repo = container.resolve('questionsRepo')
-
-class QuestionsController {
+module.exports = class QuestionsController {
+  constructor(questionsRepo) {
+    this.repo = questionsRepo
+  }
   // Get Questions
   async getAllQuestions() {
-    return await repo.getAllQuestions()
+    return await this.repo.getAllQuestions()
   }
 
   // Add question to the list
   async addQuestion(question) {
-    return await repo.addQuestion(question)
+    return await this.repo.addQuestion(question)
   }
 }
-
-module.exports = new QuestionsController()

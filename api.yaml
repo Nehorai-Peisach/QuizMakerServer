@@ -30,29 +30,38 @@ paths:
 
 components:
   schemas:
+    Answer:
+      type: object
+      properties:
+        Text:
+          type: string
+        IsCorrect:
+          type: boolean
+
     questionParams:
       type: object
-      required:
-        - Id
-        - Type
-        - TopicId
-        - Text
-        - LowerText
-        - Layout
-        - Tags
       properties:
         Id:
           type: string
-        Type:
+          format: uuid
+        CompanyId:
           type: string
+          format: uuid
         TopicId:
           type: array
           items:
             type: string
+            format: uuid
+        Type:
+          type: string
         Text:
           type: string
         LowerText:
           type: string
+        Answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
         Layout:
           type: string
         Tags:
