@@ -8,6 +8,7 @@ const cors = require('cors')
 const container = require('./helpers/containerConfig')
 const db = container.resolve('db')
 const config = container.resolve('config')
+const newTestRouter=require("./routes/NewTestRouter");
 
 app.use(cors())
 
@@ -20,3 +21,4 @@ db.connect().then(() =>
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerJsDocs))
 
 app.use('/api/Questions', questionRouter)
+app.use('/api/quizes', newTestRouter)
