@@ -15,7 +15,8 @@
     "name": "MainCluster",
     "uri": "mongodb+srv://admin:admin123@maincluster.rebcv.mongodb.net/QuizMakerDb?retryWrites=true&w=majority",
     "table": {
-      "questions": "Questions"
+      "questions": "Questions",
+      "quizes": "Quizes"
     }
   }
 }
