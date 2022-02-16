@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const Schema = new mongoose.Schema(
   {
-    Text: {
+    text: {
       type: String,
       required: true,
     },
-    IsCorrect: {
+    isCorrect: {
       type: Boolean,
       required: true,
     },
