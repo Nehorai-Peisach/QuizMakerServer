@@ -1,31 +1,33 @@
 const awilix = require('awilix');
 const db = require('../DAL/MongoDb');
 const config = require('config');
-const questionsRepo = require('../DAL/QuestionsRepository');
-const questionsController = require('../controller/questions');
-const NewTestRepo = require('../DAL/NewTestRepository');
-const NewTestController = require('../controller/newTest');
+const QuestionsRepo = require('../DAL/QuestionsRepository');
+const QuestionsController = require('../controller/QuestionsController');
+const QuizesRepo = require('../DAL/QuizesRepository');
+const QuizesController = require('../controller/QuizesController');
 const UsersRepo = require('../DAL/UsersRepository');
-const UsersController = require('../controller/users');
+const UsersController = require('../controller/UsersController');
 const StudentsRepo = require('../DAL/StudentsRepository');
-const StudentsController = require('../controller/student');
+const StudentsController = require('../controller/StudentsController');
 
 const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.CLASSIC,
-})
+});
 
 container.register({
   config: awilix.asValue(config),
 
   db: awilix.asClass(db).singleton(),
-  questionsRepo: awilix.asClass(questionsRepo).singleton(),
-  newTestRepo: awilix.asClass(NewTestRepo).singleton(),
+
+  quizesRepo: awilix.asClass(QuizesRepo).singleton(),
+  questionsRepo: awilix.asClass(QuestionsRepo).singleton(),
   usersRepo: awilix.asClass(UsersRepo).singleton(),
   studentsRepo: awilix.asClass(StudentsRepo).singleton(),
-  questionsController: awilix.asClass(questionsController).singleton(),
-  newTestController: awilix.asClass(NewTestController).singleton(),
+
+  questionsController: awilix.asClass(QuestionsController).singleton(),
+  quizesController: awilix.asClass(QuizesController).singleton(),
   usersController: awilix.asClass(UsersController).singleton(),
   studentsController: awilix.asClass(StudentsController).singleton(),
-})
+});
 
-module.exports = container
+module.exports = container;
