@@ -1,9 +1,9 @@
-const log = require('../helpers/logger');
-const Quiz = require('../models/Quiz');
+const log = require("../helpers/logger");
+const Quiz = require("../models/Quiz");
 
 module.exports = class QuizesRepository {
   constructor(config) {
-    this.table = config.get('db.table.quizes');
+    this.table = config.get("db.table.quizes");
   }
 
   async addQuiz(input) {
@@ -32,13 +32,12 @@ module.exports = class QuizesRepository {
   }
 
   async getQuizes() {
-    // let res;
-    // await Quiz.Model.find()
-    //   .then((result) => {
-    //     res = 'hi';
-    //   })
-    //   .catch((err) => log(err));
-
+    let res;
+    await Quiz.Model.find()
+      .then((result) => {
+        res = result;
+      })
+      .catch((err) => log(err));
     return res;
   }
 
