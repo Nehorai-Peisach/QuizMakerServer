@@ -17,7 +17,8 @@
     "table": {
       "questions": "Questions",
       "quizes": "Quizzes",
-      "users": "Users"
+      "users": "Users",
+      "student" :"Students"
     }
   }
 }

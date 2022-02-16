@@ -3,13 +3,14 @@ const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
 const swaggerJsDocs = YAML.load('./api.yaml')
 const app = express()
-const questionRouter = require('./routes/questionRoutes')
 const cors = require('cors')
 const container = require('./helpers/containerConfig')
 const db = container.resolve('db')
 const config = container.resolve('config')
+const questionRouter = require('./routes/questionRoutes')
 const newTestRouter=require("./routes/NewTestRouter");
 const usersRouter=require("./routes/usersRouter");
+const studentsRouter=require("./routes/studentsRouter");
 
 app.use(cors())
 
@@ -24,3 +25,4 @@ app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerJsDocs))
 app.use('/api/Questions', questionRouter);
 app.use('/api/quizes', newTestRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/students', studentsRouter);
