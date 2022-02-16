@@ -31,10 +31,6 @@ const Schema = new mongoose.Schema(
       type: [Answer],
       required: true,
     },
-    Layout: {
-      type: String,
-      required: false,
-    },
     Tags: {
       type: [String],
       required: false,
