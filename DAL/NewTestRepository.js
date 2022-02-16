@@ -7,7 +7,7 @@ module.exports = class NewTestRepository {
   }
 
   async addNewTest(input) {
-    await newTest.Model.create(input)
+    await newTest.Quiz.create(input)
       .then((result) => {
         return result
       })
