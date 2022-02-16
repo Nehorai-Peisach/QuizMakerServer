@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const Paragraph = require('./Paragraph').Schema
-const Delivery = require('./Delivery').Schema
+const mongoose = require('mongoose');
+const Paragraph = require('./Paragraph').Schema;
+const Delivery = require('./Delivery').Schema;
 
 const Schema = new mongoose.Schema(
   {
@@ -62,7 +62,7 @@ const Schema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-)
+);
 
-const Quiz = mongoose.model('Quizzes', Schema)
-module.exports = { Quiz, Schema }
+const Model = mongoose.model('Quizzes', Schema);
+module.exports = { Model, Schema };
