@@ -20,15 +20,19 @@ const Schema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    Introduction: {
-      type: Paragraph,
-      required: true,
-    },
-    TopicId: {
+    Field: {
       type: String,
+      required: false,
+    },
+    TestType: {
+      type: [String],
       required: true,
     },
     Name: {
+      type: String,
+      required: true,
+    },
+    Header: {
       type: String,
       required: true,
     },
@@ -41,16 +45,16 @@ const Schema = new mongoose.Schema(
       required: true,
     },
     MsgOnSuccess: {
-      type: Paragraph,
+      type: String,
       required: true,
     },
     MsgOnFailure: {
-      type: Paragraph,
+      type: String,
       required: true,
     },
     Delivery: {
       type: Delivery,
-      required: true,
+      required: false,
     },
     ChangedDate: {
       type: Date,
@@ -60,5 +64,5 @@ const Schema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const Quiz = mongoose.model('Quiz', Schema)
+const Quiz = mongoose.model('Quizzes', Schema)
 module.exports = { Quiz, Schema }
