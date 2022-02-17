@@ -25,7 +25,7 @@ const Schema = new mongoose.Schema(
       required: false,
     },
     TestType: {
-      type: [String],
+      type: String,
       required: true,
     },
     Name: {
