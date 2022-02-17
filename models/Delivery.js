@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Paragragh = require('./Paragraph').Schema
+const mongoose = require('mongoose');
+const Paragragh = require('./Paragraph').Schema;
 
 const Schema = new mongoose.Schema(
   {
@@ -25,7 +25,7 @@ const Schema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-)
+);
 
-const Delivery = mongoose.model('Delivery', Schema)
-module.exports = { Delivery, Schema }
+const Model = mongoose.model('Delivery', Schema);
+module.exports = { Model, Schema };

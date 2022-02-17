@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
-const UserAnswer = require('./UserAnswer').Schema
+const mongoose = require('mongoose');
+const UserAnswer = require('./UserAnswer').Schema;
 
 const Schema = new mongoose.Schema(
   {
     Id: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       required: true,
     },
     TopicId: {
@@ -41,7 +41,7 @@ const Schema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-)
+);
 
-const CompletedQuiz = mongoose.model('CompletedQuiz', Schema)
-module.exports = { CompletedQuiz, Schema }
+const Model = mongoose.model('CompletedQuiz', Schema);
+module.exports = { Model, Schema };

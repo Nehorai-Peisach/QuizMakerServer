@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema(
   {
@@ -6,13 +6,13 @@ const Schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Texts: {
-      type: [String],
+    Text: {
+      type: String,
       required: true,
     },
   },
   { timestamps: true }
-)
+);
 
-const Paragraph = mongoose.model('Paragraph', Schema)
-module.exports = { Paragraph, Schema }
+const Model = mongoose.model('Paragraph', Schema);
+module.exports = { Model, Schema };

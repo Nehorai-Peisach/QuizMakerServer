@@ -1,30 +1,24 @@
 const mongoose = require('mongoose');
+const Paragraph = require('./Paragraph').Schema;
 const Question = require('./Question').Schema;
-const Delivery = require('./Delivery').Schema;
+const Topic = require('./Topic').Schema;
+// const Delivery = require('./Delivery').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    Id: {
-      type: String,
-      required: true,
-    },
-    CompanyId: {
-      type: String,
-      required: true,
+    // Id: {
+    //   type: mongoose.Types.ObjectId,
+    //   required: true,
+    // },
+    Topic: {
+      type: Topic,
+      required: false,
     },
     Language: {
       type: String,
       required: true,
     },
-    ShowAnswersAfter: {
-      type: Boolean,
-      required: true,
-    },
-    Field: {
-      type: String,
-      required: false,
-    },
-    TestType: {
+    Type: {
       type: String,
       required: true,
     },
@@ -32,12 +26,16 @@ const Schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Header: {
-      type: String,
-      required: true,
-    },
     PassingGrade: {
       type: Number,
+      required: true,
+    },
+    ShowAnswersAfter: {
+      type: Boolean,
+      required: true,
+    },
+    Header: {
+      type: String,
       required: true,
     },
     Questions: {
@@ -45,21 +43,21 @@ const Schema = new mongoose.Schema(
       required: true,
     },
     MsgOnSuccess: {
-      type: String,
+      type: Paragraph,
       required: true,
     },
     MsgOnFailure: {
-      type: String,
+      type: Paragraph,
       required: true,
-    },
-    Delivery: {
-      type: Delivery,
-      required: false,
     },
     ChangedDate: {
       type: Date,
       required: true,
     },
+    // Delivery: {
+    //   type: Delivery,
+    //   required: false,
+    // },
   },
   { timestamps: true }
 );

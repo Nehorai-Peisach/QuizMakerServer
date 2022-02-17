@@ -6,7 +6,8 @@ const asyncHandler = require('../helpers/asyncHandler');
 
 router.use(express.json());
 
-// http://localhost:4000/api/quizes/addQuiz
+// import { GetQuestions } from 'components/helpers/QuestionsRepo';
+
 router.post(
   '/addQuiz',
   asyncHandler(async (req, res) => {
