@@ -7,6 +7,7 @@ const asyncHandler = require('../helpers/asyncHandler')
 router.use(express.json())
 
 // Get questions from db
+// http://localhost:4000/api/Questions/getQuestions
 router.get(
   '/getQuestions',
   asyncHandler(async (req, res) => {
