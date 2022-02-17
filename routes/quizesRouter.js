@@ -35,4 +35,19 @@ router.get(
   })
 );
 
+// http://localhost:4000/api/quizes/getQuiz
+router.get(
+  '/getQuiz',
+  asyncHandler(async (req, res) => {
+    try {
+      const topicId=req.query.topicId;
+      const data = await controller.getQuiz(topicId);
+      res.status(200).send(data);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  })
+);
+
 module.exports = router;
