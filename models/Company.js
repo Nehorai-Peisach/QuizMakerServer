@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema(
   {
     Id: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       required: true,
     },
     Name: {
@@ -12,7 +12,7 @@ const Schema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-)
+);
 
-const Company = mongoose.model('Company', Schema)
-module.exports = { Company, Schema }
+const Model = mongoose.model('Company', Schema);
+module.exports = { Model, Schema };

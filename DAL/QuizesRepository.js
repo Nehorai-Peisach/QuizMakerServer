@@ -1,9 +1,10 @@
-const log = require("../helpers/logger");
-const Quiz = require("../models/Quiz");
+const mongoose = require('mongoose');
+const log = require('../helpers/logger');
+const Quiz = require('../models/Quiz');
 
 module.exports = class QuizesRepository {
   constructor(config) {
-    this.table = config.get("db.table.quizes");
+    this.table = config.get('db.table.quizes');
   }
 
   async addQuiz(input) {

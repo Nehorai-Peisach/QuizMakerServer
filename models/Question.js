@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
-const Answer = require('./Answer').Schema
+const mongoose = require('mongoose');
+const Answer = require('./Answer').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    Id: {
-      type: String,
-      required: true,
-    },
+    // Id: {
+    //   type: mongoose.Types.ObjectId,
+    //   required: true,
+    // },
     CompanyId: {
       type: String,
       required: true,
@@ -37,7 +37,7 @@ const Schema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-)
+);
 
-const Model = mongoose.model('Question', Schema)
-module.exports = { Model, Schema }
+const Model = mongoose.model('Question', Schema);
+module.exports = { Model, Schema };
