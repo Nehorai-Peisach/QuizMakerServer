@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Paragraph = require('./Paragraph').Schema;
+const Question = require('./Question').Schema;
 const Delivery = require('./Delivery').Schema;
 
 const Schema = new mongoose.Schema(
@@ -40,8 +40,8 @@ const Schema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    QuestionsId: {
-      type: [String],
+    Questions: {
+      type: [Question],
       required: true,
     },
     MsgOnSuccess: {
