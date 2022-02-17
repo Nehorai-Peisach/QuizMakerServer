@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const UserAnswer = require('./UserAnswer').Schema;
+const Question = require('./Question').Schema;
+const Student = require('./Student').Schema;
+
 
 const Schema = new mongoose.Schema(
   {
@@ -7,9 +10,9 @@ const Schema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    TopicId: {
-      type: String,
-      required: true,
+    Topic: {
+      type: Topic,
+      required: false,
     },
     Name: {
       type: String,
@@ -19,15 +22,15 @@ const Schema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    QuestionsId: {
-      type: [String],
+    Questions: {
+      type: [Question],
       required: true,
     },
-    UserId: {
-      type: String,
+    Student: {
+      type: Student,
       required: true,
     },
-    UserAnswers: {
+    StudentAnswers: {
       type: [UserAnswer],
       required: true,
     },

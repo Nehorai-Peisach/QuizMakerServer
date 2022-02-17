@@ -13,4 +13,9 @@ module.exports = class QuizesController {
     const result = await this.repo.getQuizes("hi");
     return result;
   }
+
+  async getQuiz(topicId) {
+    const result = await this.repo.getQuiz(topicId);
+    return result;
+  }
 };

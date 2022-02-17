@@ -24,13 +24,17 @@ module.exports = class QuizesRepository {
   }
 
   async getQuiz(input) {
-    await Quiz.Model.find(Quiz.Schema)
-      .where(input)
+    let res="";
+    await Quiz.Model.find()
+      .then((q)=>q.find((q)=>q.Topic.Id==input))
+      // .then((q)=>q.Topic.Id==input)
       .then((result) => {
-        return result;
+        console.log(result);
+        res= result;
       })
       .catch((err) => log(err));
-  }
+  return res;
+    }
 
   async getQuizes() {
     let res;
