@@ -1,18 +1,17 @@
 const mongoose = require('mongoose');
-const Company = require('./Company').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    Id: {
+    _id: {
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    Name: {
+    name: {
       type: String,
       required: true,
     },
-    Company: {
-      type: Company,
+    company_id: {
+      type: mongoose.Types.ObjectId,
       required: true,
     },
   },

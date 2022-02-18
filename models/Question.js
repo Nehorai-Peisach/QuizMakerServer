@@ -3,35 +3,31 @@ const Answer = require('./Answer').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    // Id: {
-    //   type: mongoose.Types.ObjectId,
-    //   required: true,
-    // },
-    CompanyId: {
+    _id: {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+    topics_id: {
+      type: [mongoose.Types.ObjectId],
+      required: true,
+    },
+    type: {
       type: String,
       required: true,
     },
-    TopicId: {
-      type: [String],
-      required: true,
-    },
-    Type: {
+    text: {
       type: String,
       required: true,
     },
-    Text: {
-      type: String,
-      required: true,
-    },
-    LowerText: {
+    lower_text: {
       type: String,
       required: false,
     },
-    Answers: {
+    answers: {
       type: [Answer],
       required: true,
     },
-    Tags: {
+    tags: {
       type: [String],
       required: false,
     },

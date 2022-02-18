@@ -1,42 +1,53 @@
-const log = require('../helpers/logger')
-const User = require('../models/User')
-
 module.exports = class UsersRepository {
-  constructor(config) {
-    this.table = config.get('db.table.users')
+  constructor(logger, user) {
+    this.logger = logger;
+    this.model = user.Model;
+    this.schema = user.Schema;
   }
 
   async addUser(input) {
-    await User.Model.create(input)
+    let res;
+    await this.model
+      .create(input)
       .then((result) => {
-        return result
+        res = result;
       })
-      .catch((err) => log(err))
+      .catch((err) => log(err));
+    return res;
   }
 
   async deleteUser(input) {
-    await User.Model.deleteOne(input)
+    let res;
+    await this.model
+      .deleteOne(input)
       .then((result) => {
-        return result
+        res = result;
       })
-      .catch((err) => log(err))
+      .catch((err) => log(err));
+    return res;
   }
 
   async getUser(input) {
-    await User.Model.find(User.Schema)
+    let res;
+    await this.model
+      .find(this.schema)
       .where(input)
       .then((result) => {
-        return result
+        res = result;
       })
-      .catch((err) => log(err))
+      .catch((err) => log(err));
+    return res;
   }
 
   async updateUser(oldUser, newUser) {
-    await User.Model.updateOne(oldUser, newUser)
+    let res;
+    await this.model
+      .updateOne(oldUser, newUser)
       .where(input)
       .then((result) => {
-        return result
+        res = result;
       })
-      .catch((err) => log(err))
+      .catch((err) => log(err));
+    return res;
   }
-}
+};

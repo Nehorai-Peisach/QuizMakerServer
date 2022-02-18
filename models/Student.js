@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema(
   {
-    Id: {
+    _id: {
       type: mongoose.Types.ObjectId,
-      required: true,
+      required: false,
     },
-    FirstName: {
+    first_name: {
       type: String,
       required: true,
     },
-    LastName: {
+    last_name: {
       type: String,
       required: true,
     },
-    Email: {
+    email: {
       type: String,
       required: true,
     },

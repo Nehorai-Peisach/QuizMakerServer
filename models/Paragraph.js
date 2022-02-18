@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema(
   {
-    Title: {
+    _id: {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+    title: {
       type: String,
       required: true,
     },
-    Text: {
+    text: {
       type: String,
       required: true,
     },

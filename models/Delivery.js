@@ -3,23 +3,27 @@ const Paragragh = require('./Paragraph').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    From: {
+    _id: {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+    from: {
       type: String,
       required: true,
     },
-    CC: {
+    cc: {
       type: String,
-      required: true,
+      required: false,
     },
-    BCC: {
+    bcc: {
       type: String,
-      required: true,
+      required: false,
     },
-    PassParagragh: {
+    pass_paragragh: {
       type: Paragragh,
       required: true,
     },
-    FailParagragh: {
+    fail_paragragh: {
       type: Paragragh,
       required: true,
     },

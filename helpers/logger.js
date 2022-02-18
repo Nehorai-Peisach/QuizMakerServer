@@ -1,5 +1,5 @@
-const Log = (input) => {
+const logger = (input) => {
   console.log(input)
 }
 
-module.exports = Log
+module.exports = logger
