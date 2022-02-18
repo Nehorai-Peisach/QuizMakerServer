@@ -39,6 +39,17 @@ module.exports = class UsersRepository {
     return res;
   }
 
+  async getAllUsers() {
+    let res;
+    await this.model
+      .find(this.schema)
+      .then((result) => {
+        res = result;
+      })
+      .catch((err) => log(err));
+    return res;
+  }
+
   async updateUser(oldUser, newUser) {
     let res;
     await this.model

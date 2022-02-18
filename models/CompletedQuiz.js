@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserAnswer = require('./StudentAnswer').Schema;
+const StudentAnswer = require('./StudentAnswer').Schema;
 
 
 const Schema = new mongoose.Schema(
@@ -17,7 +17,7 @@ const Schema = new mongoose.Schema(
       required: true,
     },
     student_answers: {
-      type: [UserAnswer],
+      type: [StudentAnswer],
       required: true,
     },
     score: {

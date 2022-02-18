@@ -7,30 +7,43 @@ module.exports = class QuestionsRepository {
 
   async getAllQuestions() {
     let res;
-    // await this.model
-    //   .aggregate([
-    //     {
-    //       $lookup: {
-    //         from: 'topics',
-    //         let: { topics_id: '$topics_id' },
-    //         pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$topics_id'] } } }],
-    //         as: 'topics',
-    //       },
-    //     },
-    //     {
-    //       $project: {
-    //         _id: true,
-    //         topics: true,
-    //         type: true,
-    //         text: true,
-    //         lower_text: true,
-    //         answers: true,
-    //         tags: true,
-    //       },
-    //     },
-    //   ])
     await this.model
-      .find(this.schema)
+      .aggregate([
+        {
+          $lookup: {
+            as: 'topics',
+            from: 'topics',
+            let: { topics_id: '$topics_id' },
+            pipeline: [
+              { $match: { $expr: { $in: ['$_id', '$$topics_id'] } } },
+              {
+                $lookup: {
+                  as: 'company',
+                  from: 'companies',
+                  let: { company_id: '$company_id' },
+                  pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$company_id'] } } }],
+                },
+              },
+              {
+                $unwind: {
+                  path: '$company',
+                  preserveNullAndEmptyArrays: true,
+                },
+              },
+              {
+                $project: {
+                  company_id: false,
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            topics_id: false,
+          },
+        },
+      ])
       .then((result) => {
         res = result;
       })
