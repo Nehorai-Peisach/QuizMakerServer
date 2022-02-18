@@ -1,44 +1,30 @@
 const mongoose = require('mongoose');
-const UserAnswer = require('./UserAnswer').Schema;
-const Question = require('./Question').Schema;
-const Student = require('./Student').Schema;
+const UserAnswer = require('./StudentAnswer').Schema;
 
 
 const Schema = new mongoose.Schema(
   {
-    Id: {
+    _id: {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+    quiz_id:{
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    Topic: {
-      type: Topic,
-      required: false,
-    },
-    Name: {
-      type: String,
+    student_id: {
+      type: mongoose.Types.ObjectId,
       required: true,
     },
-    PassingGrade: {
-      type: Number,
-      required: true,
-    },
-    Questions: {
-      type: [Question],
-      required: true,
-    },
-    Student: {
-      type: Student,
-      required: true,
-    },
-    StudentAnswers: {
+    student_answers: {
       type: [UserAnswer],
       required: true,
     },
-    Score: {
+    score: {
       type: Number,
       required: true,
     },
-    DoneDate: {
+    date: {
       type: Date,
       required: true,
     },

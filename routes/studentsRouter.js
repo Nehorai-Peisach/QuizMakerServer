@@ -7,9 +7,9 @@ const asyncHandler = require('../helpers/asyncHandler')
 router.use(express.json())
 
 // Get students from db
-// http://localhost:4000/api/students/getStudents
+// http://localhost:4000/api/students/getAllStudents
 router.get(
-  '/getStudents',
+  '/getAllStudents',
   asyncHandler(async (req, res) => {
     const data = await controller.getAllStudents()
     res.send(data)
@@ -17,9 +17,9 @@ router.get(
 )
 
 // Add student to the list in db
-// http://localhost:4000/api/students/addstudent
+// http://localhost:4000/api/students/addStudent
 router.post(
-  '/addstudent',
+  '/addStudent',
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addStudent(req.body)

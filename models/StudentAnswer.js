@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 const Answer = require('./Answer').Schema;
-const Question = require('./Question').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    Question: {
-      type: Question,
+    _id: {
+      type: mongoose.Types.ObjectId,
+      required: false,
+    },
+    question_id: {
+      type: mongoose.Types.ObjectId,
       required: true,
     },
-    Answers: {
+    answers: {
       type: [Answer],
       required: true,
     },
@@ -16,5 +19,5 @@ const Schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Model = mongoose.model('UserAnswer', Schema);
+const Model = mongoose.model('StudentAnswer', Schema);
 module.exports = { Model, Schema };

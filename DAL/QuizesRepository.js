@@ -1,57 +1,107 @@
-const mongoose = require('mongoose');
-const log = require('../helpers/logger');
-const Quiz = require('../models/Quiz');
-
 module.exports = class QuizesRepository {
-  constructor(config) {
-    this.table = config.get('db.table.quizes');
+  constructor(logger, quiz) {
+    this.logger = logger;
+    this.model = quiz.Model;
+    this.schema = quiz.Schema;
   }
 
-  async addQuiz(input) {
-    await Quiz.Model.create(input)
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => log(err));
-  }
-
-  async deleteQuiz(input) {
-    await Quiz.Model.deleteOne(input)
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => log(err));
-  }
-
-  async getQuiz(input) {
-    let res="";
-    await Quiz.Model.find()
-      .then((q)=>q.find((q)=>q.Topic.Id==input))
-      // .then((q)=>q.Topic.Id==input)
-      .then((result) => {
-        console.log(result);
-        res= result;
-      })
-      .catch((err) => log(err));
-  return res;
-    }
-
-  async getQuizes() {
+  async getAllQuizes() {
     let res;
-    await Quiz.Model.find()
+    await this.model
+      .aggregate([
+        {
+          $lookup: {
+            as: 'questions',
+            from: 'questions',
+            let: { questions_id: '$questions_id' },
+            pipeline: [{ $match: { $expr: { $in: ['$_id', '$$questions_id'] } } }],
+          },
+        },
+        {
+          $lookup: {
+            as: 'topic',
+            from: 'topics',
+            let: { topic_id: '$topic_id' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$_id', '$$topic_id'] } } },
+              {
+                $lookup: {
+                  as: 'company',
+                  from: 'companies',
+                  let: { company_id: '$company_id' },
+                  pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$company_id'] } } }],
+                },
+              },
+              {
+                $unwind: {
+                  path: '$company',
+                  preserveNullAndEmptyArrays: true,
+                },
+              },
+              {
+                $project: {
+                  company_id: false,
+                },
+              },
+            ],
+          },
+        },
+        // {
+        //   $project: {
+        //     _id: true,
+        //     topic: true,
+        //     language: true,
+        //     type: true,
+        //     name: true,
+        //     passing_grade: true,
+        //     is_show_result: true,
+        //     header: true,
+        //     questions: true,
+        //     success_mgs: true,
+        //     fail_msg: true,
+        //     date: true,
+        //   },
+        // },
+      ])
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger(err));
+
     return res;
   }
 
-  async updateQuiz(oldQuiz, newQuiz) {
-    await Quiz.Model.updateOne(oldTest, newQuiz)
-      .where(input)
+  async addQuiz(input) {
+    let res;
+    await this.model
+      .create(input)
+      .then((result) => {
+        res = result;
+      })
+      .catch((err) => this.logger(err));
+
+    return res;
+  }
+
+  async deleteQuiz(input) {
+    await this.model
+      .deleteOne(input)
       .then((result) => {
         return result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger(err));
+  }
+
+  async updateQuiz(oldQuiz, newQuiz) {
+    let res;
+    await this.model
+      .updateOne(oldTest, newQuiz)
+      .where(input)
+      .then((result) => {
+        res = result;
+      })
+      .catch((err) => this.logger(err));
+
+    return res;
   }
 };

@@ -1,21 +1,33 @@
+const mongoose = require('mongoose');
+
 module.exports = class QuizesController {
   constructor(quizesRepo) {
     this.repo = quizesRepo;
   }
 
-  // Add question to the list
+  // Get all Quiz
+  async getAllQuizes() {
+    const result = await this.repo.getAllQuizes();
+    return result;
+  }
+
+  // Add quiz to the list
   async addQuiz(quiz) {
-    const result = await this.repo.addQuiz(quiz);
+    const tmpQuiz = { _id: new mongoose.Types.ObjectId(), ...quiz };
+
+    const result = await this.repo.addQuiz(tmpQuiz);
     return result;
   }
 
-  async getQuizes() {
-    const result = await this.repo.getQuizes("hi");
+  // Delete quiz to the list
+  async deleteQuiz(quiz) {
+    const result = await this.repo.deleteQuiz(quiz);
     return result;
   }
 
-  async getQuiz(topicId) {
-    const result = await this.repo.getQuiz(topicId);
+  // Update quiz to the list
+  async updateQuiz(quiz) {
+    const result = await this.repo.updateQuiz(quiz);
     return result;
   }
 };

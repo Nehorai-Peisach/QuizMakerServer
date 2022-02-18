@@ -1,28 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const container = require('../helpers/containerConfig');
-const controller = container.resolve('quizesController');
+const controller = container.resolve('completedQuizesController');
 const asyncHandler = container.resolve('asyncHandler');
 
 router.use(express.json());
 
-// Get all the quiz from db
-// http://localhost:4000/api/quizes/getAllQuizes
+// Get all the CompletedQuiz from db
+// http://localhost:4000/api/completedQuizes/getAllCompletedQuiz
 router.get(
-  '/getAllQuizes',
+  '/getAllCompletedQuiz',
   asyncHandler(async (req, res) => {
-    const data = await controller.getAllQuizes();
+    const data = await controller.getAllCompletedQuiz();
     res.send(data);
   })
 );
 
-// Add quiz to the list in db
-// http://localhost:4000/api/quizes/addQuiz
+// Add CompletedQuiz to the list in db
+// http://localhost:4000/api/completedQuizes/addCompletedQuiz
 router.post(
-  '/addQuiz',
+  '/addCompletedQuiz',
   asyncHandler(async (req, res) => {
     try {
-      const data = await controller.addQuiz(req.body);
+      const data = await controller.addCompletedQuiz(req.body);
       res.status(200).send(data);
     } catch (err) {
       console.log(err);
@@ -31,13 +31,13 @@ router.post(
   })
 );
 
-// delete quiz from the db
-// http://localhost:4000/api/quizes/deleteQuiz
+// delete CompletedQuiz from the db
+// http://localhost:4000/api/completedQuizes/deleteCompletedQuiz
 router.post(
-  '/deleteQuiz',
+  '/deleteCompletedQuiz',
   asyncHandler(async (req, res) => {
     try {
-      const data = await controller.deleteQuiz(req.body);
+      const data = await controller.deleteCompletedQuiz(req.body);
       res.status(200).send(data);
     } catch (err) {
       log(err);
@@ -46,13 +46,13 @@ router.post(
   })
 );
 
-// update quiz in db
-// http://localhost:4000/api/quizes/updateQuiz
+// update CompletedQuiz in db
+// http://localhost:4000/api/completedQuizes/updateCompletedQuiz
 router.post(
-  '/updateQuiz',
+  '/updateCompletedQuiz',
   asyncHandler(async (req, res) => {
     try {
-      const data = await controller.addQuiz(req.body);
+      const data = await controller.updateCompletedQuiz(req.body);
       res.status(200).send(data);
     } catch (err) {
       console.log(err);

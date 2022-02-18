@@ -1,63 +1,61 @@
 const mongoose = require('mongoose');
 const Paragraph = require('./Paragraph').Schema;
-const Question = require('./Question').Schema;
-const Topic = require('./Topic').Schema;
-// const Delivery = require('./Delivery').Schema;
+const Delivery = require('./Delivery').Schema;
 
 const Schema = new mongoose.Schema(
   {
-    // Id: {
-    //   type: mongoose.Types.ObjectId,
-    //   required: true,
-    // },
-    Topic: {
-      type: Topic,
+    _id: {
+      type: mongoose.Types.ObjectId,
       required: false,
     },
-    Language: {
+    topic_id: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+    },
+    language: {
       type: String,
       required: true,
     },
-    Type: {
+    type: {
       type: String,
       required: true,
     },
-    Name: {
+    name: {
       type: String,
       required: true,
     },
-    PassingGrade: {
+    passing_grade: {
       type: Number,
       required: true,
     },
-    ShowAnswersAfter: {
+    is_show_result: {
       type: Boolean,
       required: true,
     },
-    Header: {
+    header: {
       type: String,
       required: true,
     },
-    Questions: {
-      type: [Question],
+    questions_id: {
+      type: [mongoose.Types.ObjectId],
       required: true,
     },
-    MsgOnSuccess: {
+    success_mgs: {
       type: Paragraph,
       required: true,
     },
-    MsgOnFailure: {
+    fail_msg: {
       type: Paragraph,
       required: true,
     },
-    ChangedDate: {
+    date: {
       type: Date,
       required: true,
     },
-    // Delivery: {
-    //   type: Delivery,
-    //   required: false,
-    // },
+    delivery: {
+      type: Delivery,
+      required: false,
+    },
   },
   { timestamps: true }
 );
