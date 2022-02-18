@@ -7,9 +7,9 @@ const asyncHandler = require('../helpers/asyncHandler')
 router.use(express.json())
 
 // Get users from db
-// http://localhost:4000/api/users/getusers
+// http://localhost:4000/api/users/getAllUsers
 router.get(
-  '/getUsers',
+  '/getAllUsers',
   asyncHandler(async (req, res) => {
     const data = await controller.getAllUsers()
     res.send(data)
