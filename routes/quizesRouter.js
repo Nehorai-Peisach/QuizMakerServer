@@ -16,6 +16,16 @@ router.get(
   })
 );
 
+// Get one quiz from db by id
+// http://localhost:4000/api/quizes/getQuizById
+// router.get(
+//   '/getQuizById',
+//   asyncHandler(async (req, res) => {
+//     const data = await controller.getQuizById(req.query.id);
+//     res.send(data);
+//   })
+// );
+
 // Add quiz to the list in db
 // http://localhost:4000/api/quizes/addQuiz
 router.post(

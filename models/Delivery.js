@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Paragragh = require('./Paragraph').Schema;
 
 const Schema = new mongoose.Schema(
   {
@@ -20,11 +19,11 @@ const Schema = new mongoose.Schema(
       required: false,
     },
     pass_paragragh: {
-      type: Paragragh,
+      type: String,
       required: true,
     },
     fail_paragragh: {
-      type: Paragragh,
+      type: String,
       required: true,
     },
   },

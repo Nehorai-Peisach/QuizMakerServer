@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Paragraph = require('./Paragraph').Schema;
 const Delivery = require('./Delivery').Schema;
 
 const Schema = new mongoose.Schema(
@@ -41,11 +40,11 @@ const Schema = new mongoose.Schema(
       required: true,
     },
     success_mgs: {
-      type: Paragraph,
+      type: String,
       required: true,
     },
     fail_msg: {
-      type: Paragraph,
+      type: String,
       required: true,
     },
     date: {

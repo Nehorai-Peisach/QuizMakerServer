@@ -14,6 +14,7 @@ module.exports = class QuestionsRepository {
             as: 'topics',
             from: 'topics',
             let: { topics_id: '$topics_id' },
+            
             pipeline: [
               { $match: { $expr: { $in: ['$_id', '$$topics_id'] } } },
               {
