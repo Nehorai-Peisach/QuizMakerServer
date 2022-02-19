@@ -12,17 +12,17 @@ module.exports = class QuizesController {
   }
 
   // Get one Quiz by id
-  // async getQuizById(id) {
-  //   const tmp = await this.repo.getAllQuizes();
-  //   const result = tmp.filter((x) => x._id === id);
-  //   return result;
-  // }
+  async getQuizById(id) {
+    const tmpId = mongoose.Types.ObjectId(id);
+    const tmp = await this.repo.getAllQuizes();
+    const result = tmp.filter((x) => x._id !== tmpId);
+    console.log(result);
+    return result;
+  }
 
   // Add quiz to the list
   async addQuiz(quiz) {
-    const tmpQuiz = { _id: new mongoose.Types.ObjectId(), ...quiz };
-
-    const result = await this.repo.addQuiz(tmpQuiz);
+    const result = await this.repo.addQuiz(quiz);
     return result;
   }
 
