@@ -16,8 +16,7 @@ module.exports = class QuizesController {
     const tmpId = mongoose.Types.ObjectId(id);
     const tmp = await this.repo.getAllQuizes();
     const result = tmp.filter((x) => x._id !== tmpId);
-    console.log(result);
-    return result;
+    return result[0];
   }
 
   // Add quiz to the list
