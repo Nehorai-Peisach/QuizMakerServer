@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const quizAgg = require('./aggregates/quizAgg');
 
 module.exports = class QuizesRepository {
@@ -21,8 +22,14 @@ module.exports = class QuizesRepository {
 
   async addQuiz(input) {
     let res;
+
+    const quiz = {
+      _id: new mongoose.Types.ObjectId(),
+      topic_id: new mongoose.Types.ObjectId('620eafff891632706a523b5d'),
+      ...input,
+    };
     await this.model
-      .create(input)
+      .create(quiz)
       .then((result) => {
         res = result;
       })
