@@ -11,6 +11,7 @@ const questionsRouter = require('./routes/questionsRoutes');
 const quizesRouter = require('./routes/quizesRouter');
 const usersRouter = require('./routes/usersRouter');
 const studentsRouter = require('./routes/studentsRouter');
+const reportsRouter = require('./routes/reportsRouter');
 const complitedQuizes = require('./routes/completedQuizesRouter')
 
 app.use(cors());
@@ -28,3 +29,4 @@ app.use('/api/quizes', quizesRouter);
 app.use('/api/completedQuizes', complitedQuizes);
 app.use('/api/users', usersRouter);
 app.use('/api/students', studentsRouter);
+app.use('/api/reports', reportsRouter);

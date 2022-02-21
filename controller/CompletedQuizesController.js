@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 module.exports = class QuizesController {
   constructor(completedQuizesRepo) {
@@ -13,7 +13,10 @@ module.exports = class QuizesController {
 
   // Add quiz to the list
   async addCompletedQuiz(quiz) {
-    const tmpQuiz = { _id: new mongoose.Types.ObjectId(), ...quiz };
+    const tmpQuiz = {
+      _id: new mongoose.Types.ObjectId(),
+      ...quiz,
+    };
 
     const result = await this.repo.addCompletedQuiz(tmpQuiz);
     return result;

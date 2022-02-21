@@ -5,6 +5,7 @@ const QuestionsRepo = require('../DAL/QuestionsRepository');
 const QuestionsController = require('../controller/QuestionsController');
 const QuizesRepo = require('../DAL/QuizesRepository');
 const QuizesController = require('../controller/QuizesController');
+const ReportsController = require('../controller/ReportsController');
 const CompletedQuizesRepo = require('../DAL/CompletedQuizesRepository');
 const CompletedQuizesController = require('../controller/CompletedQuizesController');
 const UsersRepo = require('../DAL/UsersRepository');
@@ -40,6 +41,7 @@ container.register({
 
   questionsController: awilix.asClass(QuestionsController).singleton(),
   quizesController: awilix.asClass(QuizesController).singleton(),
+  reportsController: awilix.asClass(ReportsController).singleton(),
   completedQuizesController: awilix.asClass(CompletedQuizesController).singleton(),
   usersController: awilix.asClass(UsersController).singleton(),
   studentsController: awilix.asClass(StudentsController).singleton(),
