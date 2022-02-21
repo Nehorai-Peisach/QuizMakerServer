@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 module.exports = class QuizesController {
   constructor(quizesRepo) {
@@ -13,10 +13,15 @@ module.exports = class QuizesController {
 
   // Get one Quiz by id
   async getQuizById(id) {
-    const tmpId = mongoose.Types.ObjectId(id);
+    console.log(id);
+    // const tmpId = mongoose.Types.ObjectId(id);
     const tmp = await this.repo.getAllQuizes();
-    const result = tmp.filter((x) => x._id !== tmpId);
-    return result[0];
+    let result = tmp.find((x) => {
+      if (x._id.toString() === id) {
+        return x;
+      }
+    });
+    return result;
   }
 
   // Add quiz to the list

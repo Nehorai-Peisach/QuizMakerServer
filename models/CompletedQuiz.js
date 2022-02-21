@@ -13,7 +13,7 @@ const Schema = new mongoose.Schema(
       required: true,
     },
     student_id: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       required: true,
     },
     student_answers: {

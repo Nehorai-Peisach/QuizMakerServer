@@ -21,7 +21,7 @@ router.get(
 router.get(
   '/getQuizById',
   asyncHandler(async (req, res) => {
-    const data = await controller.getQuizById(req.body.id);
+    const data = await controller.getQuizById(req.query.id);
     res.send(data);
   })
 );
