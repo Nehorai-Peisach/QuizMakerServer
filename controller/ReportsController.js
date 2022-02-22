@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 module.exports = class ReportsController {
   constructor(completedQuizesRepo) {
@@ -21,10 +21,10 @@ module.exports = class ReportsController {
   // Get all Quizes completed between two dates.
   async getReportByStudent(params) {
     const quizes = await this.completedQuizesRepo.getAllCompletedQuiz();
-    let result = quizes.filter(
-      (q) =>
-        q.quiz._id.toString() === params.
-    );
+    // let result = quizes.filter(
+    //   (q) =>
+    //     q.quiz._id.toString() === params.
+    // );
 
     return result;
   }
