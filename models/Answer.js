@@ -14,10 +14,6 @@ const Schema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    input: {
-      type: String,
-      required: false,
-    }
   },
   { timestamps: true }
 );
