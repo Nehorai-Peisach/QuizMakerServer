@@ -13,8 +13,6 @@ module.exports = class QuizesController {
 
   // Get one Quiz by id
   async getQuizById(id) {
-    console.log(id);
-    // const tmpId = mongoose.Types.ObjectId(id);
     const tmp = await this.repo.getAllQuizes();
     let result = tmp.find((x) => {
       if (x._id.toString() === id) {

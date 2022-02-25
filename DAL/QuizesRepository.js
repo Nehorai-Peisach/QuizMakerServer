@@ -24,10 +24,10 @@ module.exports = class QuizesRepository {
     let res;
 
     const quiz = {
-      _id: new mongoose.Types.ObjectId(),
       topic_id: new mongoose.Types.ObjectId('620eafff891632706a523b5d'),
       ...input,
     };
+    if (quiz._id === undefined) quiz._id = new mongoose.Types.ObjectId();
     await this.model
       .create(quiz)
       .then((result) => {
@@ -39,12 +39,14 @@ module.exports = class QuizesRepository {
   }
 
   async deleteQuiz(quiz) {
+    let res;
     await this.model
       .deleteOne({ _id: quiz._id })
       .then((result) => {
-        return result;
+        res = result;
       })
       .catch((err) => this.logger(err));
+    return res;
   }
 
   async updateQuiz(quiz) {
