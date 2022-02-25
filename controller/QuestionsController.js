@@ -19,11 +19,23 @@ module.exports = class QuestionsController {
     return result;
   }
 
+  // Get one Quiz by id
+  async getQuestionById(id) {
+    const tmp = await this.repo.getAllQuestions();
+    let result = tmp.find((x) => {
+      if (x._id.toString() === id) {
+        return x;
+      }
+    });
+    return result;
+  }
+
   // Add question to the list
   async addQuestion(question) {
-    const tmpQuestion = { _id: new mongoose.Types.ObjectId(), ...question };
-    
-    const result = await this.repo.addQuestion(tmpQuestion);
+    const old = await this.getQuestionById(question._id);
+    let result;
+    if (!old) result = await this.repo.addQuestion(question);
+    else result = await this.updateQuestion(question);
     return result;
   }
 

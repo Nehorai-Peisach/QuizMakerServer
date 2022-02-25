@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 module.exports = class QuestionsRepository {
   constructor(logger, question) {
     this.logger = logger;
@@ -55,8 +57,15 @@ module.exports = class QuestionsRepository {
 
   async addQuestion(input) {
     let res;
+
+    const question = {
+      topic_id: new mongoose.Types.ObjectId('620eafff891632706a523b5d'),
+      ...input,
+    };
+    if (question._id === undefined) question._id = new mongoose.Types.ObjectId();
+    await this.model;
     await this.model
-      .create(input)
+      .create(question)
       .then((result) => {
         res = result;
       })
@@ -77,16 +86,8 @@ module.exports = class QuestionsRepository {
     return res;
   }
 
-  async updateQuestion(oldQuestion, newQuestion) {
-    let res;
-    await this.model
-      .updateOne(oldQuestion, newQuestion)
-      .where(input)
-      .then((result) => {
-        res = result;
-      })
-      .catch((err) => this.logger(err));
-
-    return res;
+  async updateQuestion(question) {
+    await this.deleteQuestion(question);
+    await this.addQuestion(question);
   }
 };
