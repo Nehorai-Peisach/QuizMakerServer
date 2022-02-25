@@ -38,25 +38,17 @@ module.exports = class QuizesRepository {
     return res;
   }
 
-  async deleteQuiz(input) {
+  async deleteQuiz(quiz) {
     await this.model
-      .deleteOne(input)
+      .deleteOne({ _id: quiz._id })
       .then((result) => {
         return result;
       })
       .catch((err) => this.logger(err));
   }
 
-  async updateQuiz(oldQuiz, newQuiz) {
-    let res;
-    await this.model
-      .updateOne(oldTest, newQuiz)
-      .where(input)
-      .then((result) => {
-        res = result;
-      })
-      .catch((err) => this.logger(err));
-
-    return res;
+  async updateQuiz(quiz) {
+    await this.deleteQuiz(quiz);
+    await this.addQuiz(quiz);
   }
 };

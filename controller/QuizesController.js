@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 module.exports = class QuizesController {
   constructor(quizesRepo) {
@@ -26,7 +26,10 @@ module.exports = class QuizesController {
 
   // Add quiz to the list
   async addQuiz(quiz) {
-    const result = await this.repo.addQuiz(quiz);
+    const old = await this.getQuizById(quiz._id);
+    let result;
+    if (!old) result = await this.repo.addQuiz(quiz);
+    else result = await this.updateQuiz(quiz);
     return result;
   }
 

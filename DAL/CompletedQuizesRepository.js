@@ -1,4 +1,4 @@
-const complitedAgg = require("./aggregates/complitedAgg");
+const complitedAgg = require('./aggregates/complitedAgg');
 
 module.exports = class CompletedQuizesRepository {
   constructor(logger, completedQuiz) {
@@ -43,8 +43,7 @@ module.exports = class CompletedQuizesRepository {
   async updateCompletedQuiz(oldQuiz, newQuiz) {
     let res;
     await this.model
-      .updateOne(oldTest, newQuiz)
-      .where(input)
+      .updateOne(oldQuiz, newQuiz)
       .then((result) => {
         res = result;
       })
