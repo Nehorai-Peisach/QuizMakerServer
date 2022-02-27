@@ -10,10 +10,27 @@ module.exports = class StudentsController {
     return result;
   }
 
+  async getQuizByDetails(student) {
+    const tmp = await this.repo.getAllStudents();
+    const result = tmp.find((x) => {
+      if (
+        x.first_name.toLowerCase() === student.first_name.toLowerCase() &&
+        x.last_name.toLowerCase() === student.last_name.toLowerCase() &&
+        x.email.toLowerCase() === student.email.toLowerCase()
+      )
+        return x;
+    });
+    return result;
+  }
+
   // Add student to the list
   async addStudent(student) {
-    const tmpStudent = { _id: new mongoose.Types.ObjectId(), ...student };
-    const result = await this.repo.addStudent(tmpStudent);
+    const old = await this.getQuizByDetails(student);
+    let result;
+
+    if (old === undefined) result = await this.repo.addStudent(student);
+    else result = old;
+
     return result;
   }
 };
