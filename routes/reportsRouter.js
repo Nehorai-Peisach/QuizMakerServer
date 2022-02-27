@@ -15,6 +15,15 @@ router.get(
     res.send(data)
   })
 )
+// Get report by student id
+// http://localhost:4000/api/reports/getReportByStudent
+router.get(
+  '/getReportByStudent',
+  asyncHandler(async (req, res) => {
+    const data = await controller.getReportByStudent(req.query)
+    res.send(data)
+  })
+)
 
 module.exports = router
 
