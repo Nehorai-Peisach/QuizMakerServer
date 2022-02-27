@@ -111,17 +111,6 @@ const complitedAgg = () => {
       },
     },
     {
-      $unwind: {
-        path: '$student',
-        preserveNullAndEmptyArrays: true,
-      },
-    },
-    {
-      $project: {
-        student_id: false,
-      },
-    },
-    {
       $lookup: {
         as: 'student',
         from: 'students',
