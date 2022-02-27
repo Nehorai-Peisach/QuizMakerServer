@@ -24,10 +24,8 @@ module.exports = class ReportsController {
   async getReportByStudent(params) {
     const quizes = await this.completedQuizesRepo.getAllCompletedQuiz();
     let result = quizes.filter(
-      (q) =>{
-        console.log(q._id.toString());
-        q._id.toString() === params.id
-      }
+      (q) =>
+        q.student._id.toString() === params.id
     );
 
     return result;
