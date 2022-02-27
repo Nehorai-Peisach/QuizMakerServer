@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 module.exports = class StudentRepository {
   constructor(logger, student) {
     this.logger = logger;
@@ -16,20 +18,13 @@ module.exports = class StudentRepository {
 
     return res;
   }
-  async addStudent(input) {
+
+  async addStudent(student) {
     let res;
+    if (student._id === undefined) student._id = new mongoose.Types.ObjectId();
+
     await this.model
-      .create(input)
-      .then((result) => {
-        res = result;
-      })
-      .catch((err) => this.logger(err));
-    return res;
-  }
-  async deleteStudent(input) {
-    let res;
-    await this.model
-      .deleteOne(input)
+      .create(student)
       .then((result) => {
         res = result;
       })
@@ -37,16 +32,21 @@ module.exports = class StudentRepository {
 
     return res;
   }
-  async updateStudent(oldStudent, newStudent) {
+
+  async deleteStudent(student) {
     let res;
     await this.model
-      .updateOne(oldStudent, newStudent)
-      .where(input)
+      .deleteOne({ _id: student._id })
       .then((result) => {
         res = result;
       })
       .catch((err) => this.logger(err));
 
     return res;
+  }
+
+  async updateStudent(student) {
+    await this.deleteStudent(student);
+    await this.addStudent(student);
   }
 };

@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const CalculateScore = require('../helpers/CalculateScore');
 
 module.exports = class QuizesController {
   constructor(completedQuizesRepo) {
@@ -12,13 +13,23 @@ module.exports = class QuizesController {
   }
 
   // Add quiz to the list
-  async addCompletedQuiz(quiz) {
+  async addCompletedQuiz(input) {
+    let result;
+    const score = CalculateScore(input.studentAnswers, input.quiz);
     const tmpQuiz = {
       _id: new mongoose.Types.ObjectId(),
-      ...quiz,
+      quiz_id: input.quiz._id,
+      student_id: input.student._id,
+      student_answers: input.studentAnswers,
+      score: score,
+      date: Date.now(),
     };
 
-    const result = await this.repo.addCompletedQuiz(tmpQuiz);
+    await this.repo.addCompletedQuiz(tmpQuiz);
+
+    if (score >= input.quiz.passing_grade) result = input.quiz.success_mgs;
+    else result = input.quiz.fail_mgs;
+
     return result;
   }
 

@@ -19,10 +19,11 @@ module.exports = class CompletedQuizesRepository {
     return res;
   }
 
-  async addCompletedQuiz(input) {
+  async addCompletedQuiz(quiz) {
     let res;
+
     await this.model
-      .create(input)
+      .create(quiz)
       .then((result) => {
         res = result;
       })

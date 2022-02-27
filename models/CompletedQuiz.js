@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 const StudentAnswer = require('./StudentAnswer').Schema;
 
-
 const Schema = new mongoose.Schema(
   {
     _id: {
       type: mongoose.Types.ObjectId,
       required: false,
     },
-    quiz_id:{
+    quiz_id: {
       type: mongoose.Types.ObjectId,
       required: true,
     },
     student_id: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       required: true,
     },
     student_answers: {
