@@ -10,7 +10,7 @@ module.exports = class StudentRepository {
   async getAllStudents() {
     let res;
     await this.model
-      .find(this.schema)
+      .find()
       .then((result) => {
         res = result;
       })

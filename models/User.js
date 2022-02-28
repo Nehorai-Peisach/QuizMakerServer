@@ -6,7 +6,7 @@ const Schema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required: false,
     },
-    name: {
+    username: {
       type: String,
       required: true,
     },
