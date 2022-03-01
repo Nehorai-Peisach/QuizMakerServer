@@ -39,7 +39,7 @@ const Schema = new mongoose.Schema(
       type: [mongoose.Types.ObjectId],
       required: true,
     },
-    success_mgs: {
+    success_msg: {
       type: String,
       required: true,
     },

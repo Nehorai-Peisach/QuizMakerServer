@@ -27,8 +27,8 @@ module.exports = class QuizesController {
 
     await this.repo.addCompletedQuiz(tmpQuiz);
 
-    if (score >= input.quiz.passing_grade) result = input.quiz.success_mgs;
-    else result = input.quiz.fail_mgs;
+    if (score >= input.quiz.passing_grade) result = input.quiz.success_msg;
+    else result = input.quiz.fail_msg;
 
     return result;
   }
