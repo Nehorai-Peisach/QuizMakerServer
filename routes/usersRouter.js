@@ -3,6 +3,8 @@ const router = express.Router();
 const container = require('../helpers/containerConfig');
 const controller = container.resolve('usersController');
 const asyncHandler = require('../helpers/asyncHandler');
+const logger = require('../helpers/logs/logger');
+const errorer = require('../helpers/errors/errorer');
 
 router.use(express.json());
 
@@ -11,8 +13,14 @@ router.use(express.json());
 router.get(
   '/getAllUsers',
   asyncHandler(async (req, res) => {
-    const data = await controller.getAllUsers();
-    res.send(data);
+    try {
+      const data = await controller.getAllUsers();
+      logger({ getAllUsers: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getAllUsers: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -20,8 +28,14 @@ router.get(
 router.get(
   '/getUserByDetails',
   asyncHandler(async (req, res) => {
-    const data = await controller.getUserByDetails(req.query);
-    res.send(data);
+    try {
+      const data = await controller.getUserByDetails(req.query);
+      logger({ getUserByDetails: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getUserByDetails: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -32,9 +46,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addUser(req.body);
+      logger({ adduser: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      console.log(err);
+      errorer({ adduser: { ...err } });
       res.status(400).send(err);
     }
   })

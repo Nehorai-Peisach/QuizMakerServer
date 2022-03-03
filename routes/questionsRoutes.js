@@ -3,7 +3,8 @@ const router = express.Router();
 const container = require('../helpers/containerConfig');
 const controller = container.resolve('questionsController');
 const asyncHandler = container.resolve('asyncHandler');
-
+const logger = require('../helpers/logs/logger');
+const errorer = require('../helpers/errors/errorer');
 router.use(express.json());
 
 // Get all the questions from db
@@ -11,8 +12,14 @@ router.use(express.json());
 router.get(
   '/getAllQuestions',
   asyncHandler(async (req, res) => {
-    const data = await controller.getAllQuestions();
-    res.send(data);
+    try {
+      const data = await controller.getAllQuestions();
+      logger({ getAllQuestions: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getAllQuestions: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -21,8 +28,14 @@ router.get(
 router.get(
   '/getQuestionsByTopic',
   asyncHandler(async (req, res) => {
-    const data = await controller.getQuestionByTopic(req.body);
-    res.send(data);
+    try {
+      const data = await controller.getQuestionByTopic(req.body);
+      logger({ getQuestionsByTopic: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getQuestionsByTopic: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -33,9 +46,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addQuestion(req.body);
+      logger({ addQuestion: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      console.log(err);
+      errorer({ addQuestion: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -48,9 +62,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.deleteQuestion(req.body);
+      logger({ deleteQuestion: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      log(err);
+      errorer({ deleteQuestion: { ...err } });
       res.status(400).send(err);
     }
   })

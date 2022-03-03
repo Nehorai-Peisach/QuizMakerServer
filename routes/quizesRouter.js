@@ -3,7 +3,8 @@ const router = express.Router();
 const container = require('../helpers/containerConfig');
 const controller = container.resolve('quizesController');
 const asyncHandler = container.resolve('asyncHandler');
-
+const logger = require('../helpers/logs/logger');
+const errorer = require('../helpers/errors/errorer');
 router.use(express.json());
 
 // Get all the quiz from db
@@ -11,8 +12,14 @@ router.use(express.json());
 router.get(
   '/getAllQuizes',
   asyncHandler(async (req, res) => {
-    const data = await controller.getAllQuizes();
-    res.send(data);
+    try {
+      const data = await controller.getAllQuizes();
+      logger({ getAllQuizes: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getAllQuizes: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -21,8 +28,14 @@ router.get(
 router.get(
   '/getQuizById',
   asyncHandler(async (req, res) => {
-    const data = await controller.getQuizById(req.query.id);
-    res.send(data);
+    try {
+      const data = await controller.getQuizById(req.query.id);
+      logger({ getQuizById: { ...data } });
+      res.status(200).send(data);
+    } catch (err) {
+      errorer({ getQuizById: { ...err } });
+      res.status(400).send(err);
+    }
   })
 );
 
@@ -33,9 +46,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addQuiz(req.body);
+      logger({ addQuiz: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      console.log(err);
+      errorer({ addQuiz: { ...err } });
       res.status(400).send(err);
     }
   })
