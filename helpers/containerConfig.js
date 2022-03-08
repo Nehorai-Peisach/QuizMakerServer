@@ -12,7 +12,7 @@ const UsersRepo = require('../DAL/UsersRepository');
 const UsersController = require('../controller/UsersController');
 const StudentsRepo = require('../DAL/StudentsRepository');
 const StudentsController = require('../controller/StudentsController');
-const logger = require('./logs/logger');
+const logger = require('../logger/index');
 const asyncHandler = require('./asyncHandler');
 
 const Company = require('../models/Company');
