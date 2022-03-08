@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const container = require('../helpers/containerConfig');
 const controller = container.resolve('studentsController');
-const asyncHandler = require('../helpers/asyncHandler');
-const logger = require('../helpers/logs/logger');
-const errorer = require('../helpers/errors/errorer');
+const logger = container.resolve('logger');
+const asyncHandler = container.resolve('asyncHandler');
 router.use(express.json());
 
 // Get students from db
@@ -14,10 +13,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getAllStudents();
-      logger({ getAllStudents: { ...data } });
+      logger.debug({ getAllStudents: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getAllStudents: { ...err } });
+      logger.error({ getAllStudents: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -30,10 +29,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addStudent(req.body);
-      logger({ addStudent: { ...data } });
+      logger.debug({ addStudent: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ addStudent: { ...err } });
+      logger.error({ addStudent: { ...err } });
       res.status(400).send(err);
     }
   })

@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const container = require('../helpers/containerConfig');
 const controller = container.resolve('reportsController');
-const asyncHandler = require('../helpers/asyncHandler');
-const logger = require('../helpers/logs/logger');
-const errorer = require('../helpers/errors/errorer');
+const logger = container.resolve('logger');
+const asyncHandler = container.resolve('asyncHandler');
 router.use(express.json());
 
 // Get report by quiz and date(between two dates)
@@ -14,10 +13,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getReportByQuiz(req.query);
-      logger({ getReportByQuiz: { ...data } });
+      logger.debug({ getReportByQuiz: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getReportByQuiz: { ...err } });
+      logger.error({ getReportByQuiz: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -29,10 +28,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getReportByStudent(req.query);
-      logger({ getReportByStudent: { ...data } });
+      logger.debug({ getReportByStudent: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getReportByStudent: { ...err } });
+      logger.error({ getReportByStudent: { ...err } });
       res.status(400).send(err);
     }
   })

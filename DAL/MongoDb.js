@@ -1,8 +1,8 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 module.exports = class MongoDb {
   constructor(config) {
-    this.uri = config.get('db.uri')
+    this.uri = config.get('db.uri');
   }
 
   connect() {
@@ -10,10 +10,9 @@ module.exports = class MongoDb {
       mongoose
         .connect(this.uri, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((result) => {
-          console.log('connected')
-          resolve(result)
+          resolve(result);
         })
-        .catch((error) => reject(error))
-    })
+        .catch((error) => reject(error));
+    });
   }
-}
+};

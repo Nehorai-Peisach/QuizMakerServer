@@ -12,7 +12,7 @@ module.exports = class UsersRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger.error(err));
     return res;
   }
 
@@ -23,7 +23,7 @@ module.exports = class UsersRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger.error(err));
     return res;
   }
 
@@ -35,7 +35,7 @@ module.exports = class UsersRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger.error(err));
     return res;
   }
 
@@ -46,7 +46,7 @@ module.exports = class UsersRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger.error(err));
     return res;
   }
 
@@ -58,7 +58,7 @@ module.exports = class UsersRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => log(err));
+      .catch((err) => this.logger.error(err));
     return res;
   }
 };

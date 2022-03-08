@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const container = require('../helpers/containerConfig');
+const logger = container.resolve('logger');
 const controller = container.resolve('quizesController');
 const asyncHandler = container.resolve('asyncHandler');
-const logger = require('../helpers/logs/logger');
-const errorer = require('../helpers/errors/errorer');
 router.use(express.json());
 
 // Get all the quiz from db
@@ -14,10 +13,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getAllQuizes();
-      logger({ getAllQuizes: { ...data } });
+      logger.debug({ getAllQuizes: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getAllQuizes: { ...err } });
+      logger.error({ getAllQuizes: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -30,10 +29,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getQuizById(req.query.id);
-      logger({ getQuizById: { ...data } });
+      logger.debug({ getQuizById: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getQuizById: { ...err } });
+      logger.error({ getQuizById: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -46,10 +45,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addQuiz(req.body);
-      logger({ addQuiz: { ...data } });
+      logger.debug({ addQuiz: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ addQuiz: { ...err } });
+      logger.error({ addQuiz: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -62,9 +61,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.deleteQuiz(req.body);
+      logger.debug({ deleteQuiz: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      log(err);
+      logger.error({ deleteQuiz: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -77,9 +77,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addQuiz(req.body);
+      logger.debug({ updateQuiz: { ...err } });
       res.status(200).send(data);
     } catch (err) {
-      console.log(err);
+      logger.error({ updateQuiz: { ...err } });
       res.status(400).send(err);
     }
   })

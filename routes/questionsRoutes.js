@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const container = require('../helpers/containerConfig');
+const logger = container.resolve('logger');
 const controller = container.resolve('questionsController');
 const asyncHandler = container.resolve('asyncHandler');
-const logger = require('../helpers/logs/logger');
-const errorer = require('../helpers/errors/errorer');
 router.use(express.json());
 
 // Get all the questions from db
@@ -14,10 +13,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getAllQuestions();
-      logger({ getAllQuestions: { ...data } });
+      logger.debug({ getAllQuestions: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getAllQuestions: { ...err } });
+      logger.error({ getAllQuestions: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -30,10 +29,10 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.getQuestionByTopic(req.body);
-      logger({ getQuestionsByTopic: { ...data } });
+      logger.debug({ getQuestionsByTopic: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ getQuestionsByTopic: { ...err } });
+      logger.error({ getQuestionsByTopic: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -46,10 +45,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.addQuestion(req.body);
-      logger({ addQuestion: { ...data } });
+      logger.debug({ addQuestion: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ addQuestion: { ...err } });
+      logger.error({ addQuestion: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -62,10 +61,10 @@ router.post(
   asyncHandler(async (req, res) => {
     try {
       const data = await controller.deleteQuestion(req.body);
-      logger({ deleteQuestion: { ...data } });
+      logger.debug({ deleteQuestion: { ...data } });
       res.status(200).send(data);
     } catch (err) {
-      errorer({ deleteQuestion: { ...err } });
+      logger.error({ deleteQuestion: { ...err } });
       res.status(400).send(err);
     }
   })
@@ -79,9 +78,11 @@ router.post(
     try {
       const data = await controller.updateQuestion(req.body);
       res.status(200).send(data);
+      logger.debug({ deleteQuestion: { ...data } });
     } catch (err) {
       console.log(err);
       res.status(400).send(err);
+      logger.error({ deleteQuestion: { ...data } });
     }
   })
 );

@@ -14,7 +14,7 @@ module.exports = class CompletedQuizesRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }
@@ -27,7 +27,7 @@ module.exports = class CompletedQuizesRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }
@@ -38,7 +38,7 @@ module.exports = class CompletedQuizesRepository {
       .then((result) => {
         return result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
   }
 
   async updateCompletedQuiz(oldQuiz, newQuiz) {
@@ -48,7 +48,7 @@ module.exports = class CompletedQuizesRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }

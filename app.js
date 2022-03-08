@@ -12,15 +12,19 @@ const quizesRouter = require('./routes/quizesRouter');
 const usersRouter = require('./routes/usersRouter');
 const studentsRouter = require('./routes/studentsRouter');
 const reportsRouter = require('./routes/reportsRouter');
-const complitedQuizes = require('./routes/completedQuizesRouter')
+const complitedQuizes = require('./routes/completedQuizesRouter');
+const logger = require('./logger');
 
 app.use(cors());
 
-db.connect().then(() =>
-  app.listen(config.get('server.port'), () =>
-    console.log(`YahalomTests server is running at ${config.get('server.host')}:${config.get('server.port')}`)
-  )
-);
+db.connect()
+  .then(() => {
+    logger.info('Connected to Database');
+    app.listen(config.get('server.port'), () => {
+      logger.info(`YahalomTests server is running at ${config.get('server.host')}:${config.get('server.port')}`);
+    });
+  })
+  .catch((err) => logger.error(err));
 
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 

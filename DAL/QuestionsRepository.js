@@ -50,7 +50,7 @@ module.exports = class QuestionsRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }
@@ -69,7 +69,7 @@ module.exports = class QuestionsRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }
@@ -81,7 +81,7 @@ module.exports = class QuestionsRepository {
       .then((result) => {
         res = result;
       })
-      .catch((err) => this.logger(err));
+      .catch((err) => this.logger.error(err));
 
     return res;
   }
