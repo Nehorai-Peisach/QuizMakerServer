@@ -13,12 +13,7 @@ module.exports = class StudentsController {
   async getQuizByDetails(student) {
     const tmp = await this.repo.getAllStudents();
     const result = tmp.find((x) => {
-      if (
-        x.first_name.toLowerCase() === student.first_name.toLowerCase() &&
-        x.last_name.toLowerCase() === student.last_name.toLowerCase() &&
-        x.email.toLowerCase() === student.email.toLowerCase()
-      )
-        return x;
+      if (x.email.toLowerCase() === student.email.toLowerCase()) return x;
     });
     return result;
   }
